@@ -11,13 +11,12 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
     console.log("Connected to the SQLite database.");
     db.run(
       `CREATE TABLE "streamers" (
-            "id"	INTEGER NOT NULL UNIQUE,
+            "id" INTEGER PRIMARY KEY AUTOINCREMENT,
             "name"	TEXT NOT NULL,
             "description"	TEXT NOT NULL,
             "photo"	TEXT,
             "upvotes"	INTEGER DEFAULT 0,
-            "downvotes"	INTEGER DEFAULT 0,
-            PRIMARY KEY("id" AUTOINCREMENT)
+            "downvotes"	INTEGER DEFAULT 0
         )`,
       (err) => {
         if (err) {
