@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { handleVote } from "../api/api";
 
 const StreamerPage = () => {
   const { id } = useParams();
@@ -15,27 +16,6 @@ const StreamerPage = () => {
       })
       .catch((error) => console.error(error));
   }, [streamer]);
-
-  const handleUpvote = (streamerId) => {
-    fetch(`http://localhost:8000/streamer/${streamerId}/upvote`, {
-      method: "PUT",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setStreamer(data.data);
-      })
-      .catch((error) => console.error(error));
-  };
-  const handleDownvote = (streamerId) => {
-    fetch(`http://localhost:8000/streamer/${streamerId}/downvote`, {
-      method: "PUT",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setStreamer(data.data);
-      })
-      .catch((error) => console.error(error));
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -61,21 +41,21 @@ const StreamerPage = () => {
         <span className="mr-4">
           <strong
             onClick={() => {
-              handleUpvote(id);
+              handleVote(streamer.id, "upvote");
             }}
           >
             Upvotes:
-          </strong>{" "}
+          </strong>
           {streamer.upvotes}
         </span>
         <span>
           <strong
             onClick={() => {
-              handleDownvote(id);
+              handleVote(streamer.id, "downvote");
             }}
           >
             Downvotes:
-          </strong>{" "}
+          </strong>
           {streamer.downvotes}
         </span>
       </div>

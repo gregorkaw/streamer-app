@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddStreamerForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    photo: '',
-    platform: 'Twitch',
+    name: "",
+    description: "",
+    photo: "",
+    platform: "Twitch",
   });
 
   const handleChange = (event) => {
@@ -17,33 +17,33 @@ const AddStreamerForm = () => {
 
   const handleSubmit = (event) => {
     const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      };
-    
-      fetch('http://localhost:8000/streamers', requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Error adding streamer');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          // Handle success response here
-          console.log('Streamer added successfully:', data);
-          // Reset the form data
-          setFormData({
-            name: '',
-            description: '',
-            photo: '',
-            platform: 'Twitch',
-          });
-        })
-        .catch((error) => {
-          // Handle error response here
-          console.error('Error adding streamer:', error);
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    };
+
+    fetch("http://localhost:8000/streamers", requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error adding streamer");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle success response here
+        console.log("Streamer added successfully:", data);
+        // Reset the form data
+        setFormData({
+          name: "",
+          description: "",
+          photo: "",
+          platform: "Twitch",
         });
+      })
+      .catch((error) => {
+        // Handle error response here
+        console.error("Error adding streamer:", error);
+      });
   };
 
   return (

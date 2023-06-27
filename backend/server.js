@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const cors = require('cors')
+const cors = require("cors");
 const db = require("./database.js");
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 // Server port
 const HTTP_PORT = 8000;
 
@@ -66,10 +66,11 @@ app.post("/streamers", (req, res) => {
     name: req.body.name,
     description: req.body.description,
     photo: req.body.photo,
-    platform: req.body.platform
+    platform: req.body.platform,
   };
 
-  const sql = "INSERT INTO streamers (name, description, photo, platform) VALUES (?, ?, ?, ?)";
+  const sql =
+    "INSERT INTO streamers (name, description, photo, platform) VALUES (?, ?, ?, ?)";
   const params = [data.name, data.description, data.photo, data.platform];
 
   db.run(sql, params, function (err) {
@@ -108,26 +109,67 @@ app.put("/streamer/:id/upvote", (req, res) => {
 });
 
 app.put("/streamer/:id/downvote", (req, res) => {
-    const streamerId = req.params.id;
-    const sql = "UPDATE streamers SET downvotes = downvotes + 1 WHERE id = ?";
-    const params = [streamerId];
-  
-    db.run(sql, params, function (err) {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-      if (this.changes > 0) {
+  const streamerId = req.params.id;
+  const sql = "UPDATE streamers SET downvotes = downvotes + 1 WHERE id = ?";
+  const params = [streamerId];
+
+  db.run(sql, params, function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (this.changes > 0) {
+      res.json({
+        message: "success",
+        streamerId,
+        changes: this.changes,
+      });
+    } else {
+      res.status(404).json({ message: "Streamer not found" });
+    }
+  });
+});
+
+app.put("/streamer/:id/removevote", (req, res) => {
+  const streamerId = req.params.id;
+  const { voteType } = req.body;
+
+  const sql = "SELECT upvotes, downvotes FROM streamers WHERE id = ?";
+  const params = [streamerId];
+
+  db.get(sql, params, (err, row) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+
+    let upvotes = row.upvotes;
+    let downvotes = row.downvotes;
+
+    if (voteType === "upvote" && upvotes > 0) {
+      upvotes--;
+    } else if (voteType === "downvote" && downvotes > 0) {
+      downvotes--;
+    }
+
+    db.run(
+      "UPDATE streamers SET upvotes = ?, downvotes = ? WHERE id = ?",
+      [upvotes, downvotes, streamerId],
+      function (err) {
+        if (err) {
+          res.status(400).json({ error: err.message });
+          return;
+        }
+
         res.json({
           message: "success",
-          streamerId,
+          streamerId: streamerId,
           changes: this.changes,
         });
-      } else {
-        res.status(404).json({ message: "Streamer not found" });
       }
-    });
+    );
   });
+});
 
 // Default response for any other request
 app.use((req, res) => {
