@@ -1,0 +1,63 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "test",
+            "database": "qgroup",
+            "username": "root",
+            "password": "J@m@jka721"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "test",
+            "database": "qgroup",
+            "username": "root",
+            "password": "J@m@jka721"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "test",
+            "database": "qgroup",
+            "username": "root",
+            "password": "J@m@jka721"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "test2",
+            "database": "qgroup",
+            "username": "root",
+            "password": "J@m@jka721"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "streamers",
+            "database": "${workspaceFolder:backend}/db.sqlite3"
+        }
+    ]
+}
