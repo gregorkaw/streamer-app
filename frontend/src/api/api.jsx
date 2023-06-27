@@ -13,7 +13,7 @@ export const handleVote = (streamerId, voteType) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Update the local storage and re-fetch the streamers
+          // Update the local storage
           const updatedVotedStreamers = votedStreamers.filter(
             (id) => id !== streamerId
           );
@@ -21,7 +21,7 @@ export const handleVote = (streamerId, voteType) => {
             "votedStreamers",
             JSON.stringify(updatedVotedStreamers)
           );
-          fetchStreamers();
+
         })
         .catch((error) => console.error(error));
     } else {
@@ -31,7 +31,7 @@ export const handleVote = (streamerId, voteType) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Update the local storage and re-fetch the streamers
+          // Update the local storage
           const updatedVotedStreamers = votedStreamers.filter(
             (id) => id !== streamerId
           );
@@ -40,7 +40,7 @@ export const handleVote = (streamerId, voteType) => {
             "votedStreamers",
             JSON.stringify(updatedVotedStreamers)
           );
-          fetchStreamers();
+          
         })
         .catch((error) => console.error(error));
     }

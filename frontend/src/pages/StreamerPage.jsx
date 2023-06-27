@@ -26,7 +26,7 @@ const StreamerPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 h-[100vh]">
       <h1 className="text-3xl font-bold mb-6">{streamer.name}</h1>
       <h1 className="text-3xl font-bold mb-6">Platform: {streamer.platform}</h1>
       <div className="flex items-center justify-center mb-6">
