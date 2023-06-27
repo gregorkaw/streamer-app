@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require('cors')
 const db = require("./database.js");
 
 app.use(express.json());
-
+app.use(cors())
 // Server port
 const HTTP_PORT = 8000;
 
@@ -53,6 +54,9 @@ app.post("/streamers", (req, res) => {
   if (!req.body.photo) {
     errors.push("No photo provided");
   }
+  if (!req.body.platform) {
+    errors.push("No platform provided");
+  }
   if (errors.length > 0) {
     res.status(400).json({ errors });
     return;
@@ -62,10 +66,11 @@ app.post("/streamers", (req, res) => {
     name: req.body.name,
     description: req.body.description,
     photo: req.body.photo,
+    platform: req.body.platform
   };
 
-  const sql = "INSERT INTO streamers (name, description, photo) VALUES (?, ?, ?)";
-  const params = [data.name, data.description, data.photo];
+  const sql = "INSERT INTO streamers (name, description, photo, platform) VALUES (?, ?, ?, ?)";
+  const params = [data.name, data.description, data.photo, data.platform];
 
   db.run(sql, params, function (err) {
     if (err) {

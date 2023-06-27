@@ -1,10 +1,14 @@
-function App() {
+import MainPage from "./pages/MainPage";
+import { Route, Routes } from "react-router-dom";
+import StreamerPage from "./pages/StreamerPage";
 
+function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello World!</h1>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/streamer/:id" element={<StreamerPage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
