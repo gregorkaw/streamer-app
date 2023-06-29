@@ -7,6 +7,7 @@ const AddStreamerForm = () => {
     photo: "",
     platform: "Twitch",
   });
+  const [showing, setShowing] = useState(false)
 
   const handleChange = (event) => {
     setFormData({
@@ -47,8 +48,10 @@ const AddStreamerForm = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    (showing ?
+      <div className="container mx-auto px-4 py-8 w-1/3">
       <h1 className="text-3xl font-bold mb-6">Add Streamer</h1>
+      <button onClick={() => setShowing(false)} className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mb-2">Hide</button>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="name" className="block font-semibold mb-2">
@@ -112,12 +115,13 @@ const AddStreamerForm = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+          className="bg-gray-500 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded"
         >
           Add Streamer
         </button>
       </form>
-    </div>
+    </div> : <button className="bg-gray-500 hover:bg-gray-800 text-white font-bold mt-8 py-2 px-4 rounded" onClick={() => setShowing(true)}>Add Streamer</button>)
+    
   );
 };
 

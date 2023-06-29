@@ -25,51 +25,18 @@ const StreamersList = () => {
   };
 
   const handleVote = (streamerId, voteType) => {
-    const votedStreamers =
-      JSON.parse(localStorage.getItem("votedStreamers")) || [];
-
-    if (votedStreamers.includes(streamerId)) {
-      // User has already voted for this streamer, so we'll remove their vote
-      const oppositeVoteType = voteType === "upvote" ? "upvote" : "downvote";
-
-      fetch(`http://localhost:8000/streamer/${streamerId}/removevote`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ voteType: oppositeVoteType }),
+    fetch(`http://localhost:8000/streamer/${streamerId}/vote`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ voteType }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data or perform any necessary actions
+        console.log(data);
+        fetchStreamers();
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // Update the local storage and re-fetch the streamers
-          const updatedVotedStreamers = votedStreamers.filter(
-            (id) => id !== streamerId
-          );
-          localStorage.setItem(
-            "votedStreamers",
-            JSON.stringify(updatedVotedStreamers)
-          );
-          fetchStreamers();
-        })
-        .catch((error) => console.error(error));
-    } else {
-      // User hasn't voted for this streamer, so we'll add their vote
-      fetch(`http://localhost:8000/streamer/${streamerId}/${voteType}`, {
-        method: "PUT",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Update the local storage and re-fetch the streamers
-          const updatedVotedStreamers = votedStreamers.filter(
-            (id) => id !== streamerId
-          );
-          updatedVotedStreamers.push(streamerId);
-          localStorage.setItem(
-            "votedStreamers",
-            JSON.stringify(updatedVotedStreamers)
-          );
-          fetchStreamers();
-        })
-        .catch((error) => console.error(error));
-    }
+      .catch((error) => console.error(error));
   };
 
   if (loading) {
@@ -84,38 +51,44 @@ const StreamersList = () => {
       ) : (
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {streamers.map((streamer) => (
-            <li key={streamer.id} className="bg-white shadow rounded p-4">
+            <li key={streamer.id} className="bg-white shadow rounded p-4 hover:scale-105 transition duration-300">
+              <div className="flex flex-col items-center justify-center">
               <img
-                className="w-40 h-40 object-cover rounded cursor-pointer"
+                className="w-40 h-40 object-cover rounded cursor-pointer hover:scale-105 transition duration-300"
                 src={streamer.photo}
                 alt={streamer.name}
                 onClick={() => handleStreamerClick(streamer.id)}
               />
-              <h3 className="text-lg font-semibold mb-2">{streamer.name}</h3>
-              <h3 className="text-lg font-semibold mb-2">
+              <h3 className="text-xl font-semibold my-2">{streamer.name}</h3>
+              <h3 className="text-lg font-semibold mb-2 bg-gray-200 p-2 rounded w-24 flex items-center justify-center">
                 {streamer.platform}
               </h3>
-              <div className="text-gray-500">
-                <span className="mr-4">
-                  <strong
-                    onClick={() => {
-                      handleVote(streamer.id, "upvote");
-                    }}
-                  >
-                    Upvotes:
-                  </strong>
-                  {streamer.upvotes}
-                </span>
-                <span>
-                  <strong
-                    onClick={() => {
-                      handleVote(streamer.id, "downvote");
-                    }}
-                  >
-                    Downvotes:
-                  </strong>
-                  {streamer.downvotes}
-                </span>
+              <div className="text-gray-500 2xl:flex justify-between items-center gap-6 mt-2">
+                <div>
+                  <span className="mr-2 cursor-pointer">
+                    <strong
+                      onClick={() => {
+                        handleVote(streamer.id, "upvote");
+                      }}
+                    >
+                      👍:{" "}
+                    </strong>
+                    {streamer.upvotes}
+                  </span>
+                  <span className="cursor-pointer">
+                    <strong
+                      onClick={() => {
+                        handleVote(streamer.id, "downvote");
+                      }}
+                    >
+                      👎:{" "}
+                    </strong>
+                    {streamer.downvotes}
+                  </span>
+                </div>
+
+                <button className="bg-gray-200 px-4 p-2 rounded mt-2 2xl:mt-0 font-bold hover:scale-105 transition duration-300" onClick={() => handleStreamerClick(streamer.id)}>Go to page..</button>
+              </div>
               </div>
             </li>
           ))}

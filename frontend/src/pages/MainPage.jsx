@@ -5,7 +5,7 @@ import AddStreamerForm from "../components/AddStreamerForm";
 const MainPage = () => {
   return (
     <>
-      <AddStreamerForm />
+      <div className="flex justify-center "><AddStreamerForm /></div>
       <StreamersList />
     </>
   );

@@ -86,89 +86,60 @@ app.post("/streamers", (req, res) => {
   });
 });
 
-app.put("/streamer/:id/upvote", (req, res) => {
-  const streamerId = req.params.id;
-  const sql = "UPDATE streamers SET upvotes = upvotes + 1 WHERE id = ?";
-  const params = [streamerId];
+let mockAuth = [];
 
-  db.run(sql, params, function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    if (this.changes > 0) {
-      res.json({
-        message: "success",
-        streamerId,
-        changes: this.changes,
-      });
-    } else {
-      res.status(404).json({ message: "Streamer not found" });
-    }
-  });
-});
-
-app.put("/streamer/:id/downvote", (req, res) => {
-  const streamerId = req.params.id;
-  const sql = "UPDATE streamers SET downvotes = downvotes + 1 WHERE id = ?";
-  const params = [streamerId];
-
-  db.run(sql, params, function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    if (this.changes > 0) {
-      res.json({
-        message: "success",
-        streamerId,
-        changes: this.changes,
-      });
-    } else {
-      res.status(404).json({ message: "Streamer not found" });
-    }
-  });
-});
-
-app.put("/streamer/:id/removevote", (req, res) => {
+app.put("/streamer/:id/vote", (req, res) => {
   const streamerId = req.params.id;
   const { voteType } = req.body;
 
-  const sql = "SELECT upvotes, downvotes FROM streamers WHERE id = ?";
-  const params = [streamerId];
+  const voteIndex = mockAuth.findIndex((item) => item.streamerId === streamerId);
+  const existingVoteType = mockAuth[voteIndex]?.voteType;
 
-  db.get(sql, params, (err, row) => {
-    if (err) {
-      res.status(400).json({ error: err.message });
-      return;
+  if (voteIndex > -1) {
+    // Vote exists for the streamer, remove the vote
+    mockAuth.splice(voteIndex, 1); // Remove the vote object
+
+    // Decrement the corresponding vote in the database
+    let sql, params;
+    if (existingVoteType === "upvote") {
+      sql = "UPDATE streamers SET upvotes = upvotes - 1 WHERE id = ?";
+    } else if (existingVoteType === "downvote") {
+      sql = "UPDATE streamers SET downvotes = downvotes - 1 WHERE id = ?";
     }
+    params = [streamerId];
 
-    let upvotes = row.upvotes;
-    let downvotes = row.downvotes;
-
-    if (voteType === "upvote" && upvotes > 0) {
-      upvotes--;
-    } else if (voteType === "downvote" && downvotes > 0) {
-      downvotes--;
-    }
-
-    db.run(
-      "UPDATE streamers SET upvotes = ?, downvotes = ? WHERE id = ?",
-      [upvotes, downvotes, streamerId],
-      function (err) {
-        if (err) {
-          res.status(400).json({ error: err.message });
-          return;
-        }
-
-        res.json({
-          message: "success",
-          streamerId: streamerId,
-          changes: this.changes,
-        });
+    db.run(sql, params, function (err) {
+      if (err) {
+        res.status(500).json({ error: "Internal server error" });
+        console.log(err)
+        return;
       }
-    );
-  });
+
+      res.json({ message: "Vote removed" });
+    });
+  } else {
+    // Vote doesn't exist, add the vote
+    mockAuth.push({ streamerId, voteType });
+
+    // Increment the corresponding vote in the database
+    let sql, params;
+    if (voteType === "upvote") {
+      sql = "UPDATE streamers SET upvotes = upvotes + 1 WHERE id = ?";
+    } else if (voteType === "downvote") {
+      sql = "UPDATE streamers SET downvotes = downvotes + 1 WHERE id = ?";
+    }
+    params = [streamerId];
+
+    db.run(sql, params, function (err) {
+      if (err) {
+        res.status(500).json({ error: "Internal server error" });
+        console.log(err)
+        return;
+      }
+
+      res.json({ message: "Vote added" });
+    });
+  }
 });
 
 // Default response for any other request
