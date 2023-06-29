@@ -53,7 +53,7 @@ const StreamersList = () => {
           {streamers.map((streamer) => (
             <li
               key={streamer.id}
-              className="bg-white shadow rounded p-4 hover:scale-105 transition duration-300"
+              className="bg-white shadow-sm shadow-gray-900 rounded p-4 hover:scale-105 transition duration-300"
             >
               <div className="flex flex-col items-center justify-center">
                 <img

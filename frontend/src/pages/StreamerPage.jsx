@@ -53,16 +53,16 @@ const StreamerPage = () => {
       </div>
       <div className="text-lg mb-4 mx-12">{streamer.description}</div>
       <div className="text-gray-500 flex justify-center">
-        <span
+        <span className="mr-4 cursor-pointer"
           onClick={() => {
             handleVote(streamer.id, "upvote");
           }}
-          className="mr-4"
+          
         >
           <strong>Upvotes: </strong>
           {streamer.upvotes}
         </span>
-        <span
+        <span className="cursor-pointer"
           onClick={() => {
             handleVote(streamer.id, "downvote");
           }}
