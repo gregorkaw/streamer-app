@@ -42,8 +42,8 @@ const StreamerPage = () => {
     <div className="container mx-auto px-4 py-8 h-[100vh]">
       <h1 className="text-3xl font-bold mb-6">{streamer.name}</h1>
       <h3 className="text-lg font-semibold mb-2 bg-gray-200 p-2 rounded w-24 flex items-center justify-center">
-                {streamer.platform}
-              </h3>
+        {streamer.platform}
+      </h3>
       <div className="flex items-center justify-center mb-6">
         <img
           className="w-160 h-160 object-cover rounded"
@@ -53,24 +53,21 @@ const StreamerPage = () => {
       </div>
       <div className="text-lg mb-4 mx-12">{streamer.description}</div>
       <div className="text-gray-500 flex justify-center">
-        <span className="mr-4">
-          <strong
-            onClick={() => {
-              handleVote(streamer.id, "upvote");
-            }}
-          >
-            Upvotes:{" "}
-          </strong>
+        <span
+          onClick={() => {
+            handleVote(streamer.id, "upvote");
+          }}
+          className="mr-4"
+        >
+          <strong>Upvotes: </strong>
           {streamer.upvotes}
         </span>
-        <span>
-          <strong
-            onClick={() => {
-              handleVote(streamer.id, "downvote");
-            }}
-          >
-            Downvotes:{" "}
-          </strong>
+        <span
+          onClick={() => {
+            handleVote(streamer.id, "downvote");
+          }}
+        >
+          <strong>Downvotes: </strong>
           {streamer.downvotes}
         </span>
       </div>

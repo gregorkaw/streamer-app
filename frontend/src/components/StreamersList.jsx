@@ -51,44 +51,50 @@ const StreamersList = () => {
       ) : (
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {streamers.map((streamer) => (
-            <li key={streamer.id} className="bg-white shadow rounded p-4 hover:scale-105 transition duration-300">
+            <li
+              key={streamer.id}
+              className="bg-white shadow rounded p-4 hover:scale-105 transition duration-300"
+            >
               <div className="flex flex-col items-center justify-center">
-              <img
-                className="w-40 h-40 object-cover rounded cursor-pointer hover:scale-105 transition duration-300"
-                src={streamer.photo}
-                alt={streamer.name}
-                onClick={() => handleStreamerClick(streamer.id)}
-              />
-              <h3 className="text-xl font-semibold my-2">{streamer.name}</h3>
-              <h3 className="text-lg font-semibold mb-2 bg-gray-200 p-2 rounded w-24 flex items-center justify-center">
-                {streamer.platform}
-              </h3>
-              <div className="text-gray-500 2xl:flex justify-between items-center gap-6 mt-2">
-                <div>
-                  <span className="mr-2 cursor-pointer">
-                    <strong
+                <img
+                  className="w-40 h-40 object-cover rounded cursor-pointer hover:scale-105 transition duration-300"
+                  src={streamer.photo}
+                  alt={streamer.name}
+                  onClick={() => handleStreamerClick(streamer.id)}
+                />
+                <h3 className="text-xl font-semibold my-2">{streamer.name}</h3>
+                <h3 className="text-lg font-semibold mb-2 bg-gray-200 p-2 rounded w-24 flex items-center justify-center">
+                  {streamer.platform}
+                </h3>
+                <div className="text-gray-500 2xl:flex justify-between items-center gap-6 mt-2">
+                  <div>
+                    <span
                       onClick={() => {
                         handleVote(streamer.id, "upvote");
                       }}
+                      className="mr-2 cursor-pointer"
                     >
-                      👍:{" "}
-                    </strong>
-                    {streamer.upvotes}
-                  </span>
-                  <span className="cursor-pointer">
-                    <strong
+                      <strong>👍: </strong>
+                      {streamer.upvotes}
+                    </span>
+                    <span
                       onClick={() => {
                         handleVote(streamer.id, "downvote");
                       }}
+                      className="cursor-pointer"
                     >
-                      👎:{" "}
-                    </strong>
-                    {streamer.downvotes}
-                  </span>
-                </div>
+                      <strong>👎: </strong>
+                      {streamer.downvotes}
+                    </span>
+                  </div>
 
-                <button className="bg-gray-200 px-4 p-2 rounded mt-2 2xl:mt-0 font-bold hover:scale-105 transition duration-300" onClick={() => handleStreamerClick(streamer.id)}>Go to page..</button>
-              </div>
+                  <button
+                    className="bg-gray-200 px-4 p-2 rounded mt-2 2xl:mt-0 font-bold hover:scale-105 transition duration-300"
+                    onClick={() => handleStreamerClick(streamer.id)}
+                  >
+                    Go to page..
+                  </button>
+                </div>
               </div>
             </li>
           ))}
