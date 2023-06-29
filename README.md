@@ -4,7 +4,7 @@ This is a Streamer App that allows users to check, add and upvote or downvote st
 
 ## Installation
 
-To use the Streamer Voting App locally on your computer, follow these steps:
+To use the Streamer App locally on your computer, follow these steps:
 
 ### Prerequisites
 
@@ -18,7 +18,7 @@ To use the Streamer Voting App locally on your computer, follow these steps:
 3. Run the following command to clone the repository:
 
    ```shell
-   git clone https://github.com/your-username/streamer-voting-app.git
+   git clone (https://github.com/gregorkaw/streamer-app)
 
 ### Setting up
 
@@ -44,7 +44,7 @@ To use the Streamer Voting App locally on your computer, follow these steps:
 
 The server will start running on http://localhost:8000.
 
-5. Change the directory to the frontend
+5. Change the directory to the frontend:
 
    ```shell
    cd ../
@@ -55,14 +55,14 @@ The server will start running on http://localhost:8000.
    ```shell
    npm install
 
-7. Start the React frontend server:
+7. Start the React frontend server with:
 
    ```shell
    npm run dev
 
 8. The frontend application should be accessible at http://localhost:5137(if not the correct URL will be in the command prompt).
 
-   Remember to use separate command windows for both backend and frontend
+   Remember to use separate command windows for both backend and frontend!
 
 ### Usage
 
@@ -73,5 +73,3 @@ The server will start running on http://localhost:8000.
    5. You can add other streamers using "Add streamer" form
    6. You can access the streamer page by clicking on his/hers photo or button
    7. Feel free to explore the app, add and vote for your favorite streamers!
-
-   
