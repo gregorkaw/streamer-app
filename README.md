@@ -66,7 +66,7 @@ The server will start running on http://localhost:8000.
 
 ### Usage
 
-   1. Open a web browser and visit http://localhost:3000 to access the Streamer App.
+   1. Open a web browser and visit http://localhost:5137 to access the Streamer App.
    2. Browse the list of streamers and click the "Upvote" or "Downvote" button to vote for a streamer.
    3. You can only upvote or downvote a streamer once. Clicking the button again will remove your vote.
    4. The vote count for each streamer will be updated in real-time.
