@@ -39,11 +39,14 @@ const StreamerPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 h-[100vh]">
-      <h1 className="text-3xl font-bold mb-6">{streamer.name}</h1>
-      <h3 className="text-lg font-semibold mb-2 bg-gray-200 p-2 rounded w-24 flex items-center justify-center">
+    <div className="p-4 bg-zinc-950 h-[100vh]">
+      <div className="w-full flex flex-col justify-center items-center mt-12"> 
+        <h1 className="text-white text-3xl font-bold mb-6">{streamer.name}</h1>
+        <h3 className="text-lg font-semibold mb-2 bg-white p-2 rounded w-24 flex items-center justify-center">
         {streamer.platform}
-      </h3>
+        </h3>
+      </div>
+      
       <div className="flex items-center justify-center mb-6">
         <img
           className="w-160 h-160 object-cover rounded"
@@ -51,7 +54,7 @@ const StreamerPage = () => {
           alt={streamer.name}
         />
       </div>
-      <div className="text-lg mb-4 mx-12">{streamer.description}</div>
+      <div className="text-white text-lg mb-4 mx-12">{streamer.description}</div>
       <div className="text-gray-500 flex justify-center">
         <span className="mr-4 cursor-pointer"
           onClick={() => {

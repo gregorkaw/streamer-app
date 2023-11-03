@@ -50,11 +50,11 @@ const AddStreamerForm = () => {
   return (
     (showing ?
       <div className="container mx-auto px-4 py-8 w-1/3">
-      <h1 className="text-3xl font-bold mb-6">Add Streamer</h1>
-      <button onClick={() => setShowing(false)} className="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mb-2">Hide</button>
+      <h1 className="text-white text-3xl font-bold mb-6">Add Streamer</h1>
+      <button onClick={() => setShowing(false)} className="bg-white hover:bg-gray-400 duration-300 text-black font-bold py-2 px-4 rounded mb-2">Hide</button>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="name" className="block font-semibold mb-2">
+          <label htmlFor="name" className="text-white block font-semibold mb-2">
             Name
           </label>
           <input
@@ -63,12 +63,12 @@ const AddStreamerForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="border border-gray-300 rounded px-4 py-2 w-full"
+            className="border border-gray-300 bg-zinc-800 text-white rounded px-4 py-2 w-full"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block font-semibold mb-2">
+          <label htmlFor="description" className="text-white  block font-semibold mb-2">
             Description
           </label>
           <textarea
@@ -76,12 +76,12 @@ const AddStreamerForm = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="border border-gray-300 rounded px-4 py-2 w-full"
+            className="border border-gray-300 bg-zinc-800 text-white rounded px-4 py-2 w-full"
             required
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="photo" className="block font-semibold mb-2">
+          <label htmlFor="photo" className="block text-white font-semibold mb-2">
             Photo URL
           </label>
           <input
@@ -90,12 +90,12 @@ const AddStreamerForm = () => {
             name="photo"
             value={formData.photo}
             onChange={handleChange}
-            className="border border-gray-300 rounded px-4 py-2 w-full"
+            className="border bg-zinc-800 text-white  border-gray-300 rounded px-4 py-2 w-full"
             required
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="platform" className="block font-semibold mb-2">
+          <label htmlFor="platform" className="text-white block font-semibold mb-2">
             Platform
           </label>
           <select
@@ -103,7 +103,7 @@ const AddStreamerForm = () => {
             name="platform"
             value={formData.platform}
             onChange={handleChange}
-            className="border border-gray-300 rounded px-4 py-2 w-full"
+            className="border bg-zinc-800 text-white  border-gray-300 rounded px-4 py-2 w-full"
             required
           >
             <option value="Twitch">Twitch</option>
@@ -115,12 +115,12 @@ const AddStreamerForm = () => {
         </div>
         <button
           type="submit"
-          className="bg-gray-500 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded"
+          className="bg-white hover:bg-gray-400 duration-300 text-black font-semibold py-2 px-4 rounded"
         >
           Add Streamer
         </button>
       </form>
-    </div> : <button className="bg-gray-500 hover:bg-gray-800 text-white font-bold mt-8 py-2 px-4 rounded" onClick={() => setShowing(true)}>Add Streamer</button>)
+    </div> : <button className="bg-white hover:bg-gray-400 text-black font-bold mt-8 py-2 px-4 rounded duration-300" onClick={() => setShowing(true)}>Add Streamer</button>)
     
   );
 };
