@@ -40,7 +40,7 @@ const StreamersList = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="h-[100vh] text-xl text-white text-center flex items-center justify-center">Loading...</div>;
   }
 
   return (
