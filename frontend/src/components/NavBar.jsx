@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="bg-black text-white py-4 sticky top-0">
+    <nav className="bg-black text-white lg:px-0 px-12 py-4 sticky top-0">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="text-xl font-bold ">
           Streamers App

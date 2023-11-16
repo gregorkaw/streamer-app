@@ -54,7 +54,7 @@ const StreamerPage = () => {
           alt={streamer.name}
         />
       </div>
-      <div className="text-white text-lg mb-4 mx-12">{streamer.description}</div>
+      <div className="text-white text-center text-lg mb-4 mx-12">{streamer.description}</div>
       <div className="text-gray-500 flex justify-center">
         <span className="mr-4 cursor-pointer"
           onClick={() => {

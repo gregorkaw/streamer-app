@@ -4,7 +4,7 @@ import AddStreamerForm from "../components/AddStreamerForm";
 
 const MainPage = () => {
   return (
-    <div className="bg-zinc-950">
+    <div className="bg-zinc-800">
       <div className="flex justify-center "><AddStreamerForm /></div>
       <StreamersList />
     </div>
